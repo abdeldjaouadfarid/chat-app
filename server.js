@@ -23,7 +23,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Socket.io
 _socketio.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
+    console.log( `User connected >>> ${socket.id} at ${new Date().toLocaleString()}` );
+    socket.emit(
+        'message', 
+        { 
+            text: 'Welcome to the chat app!', 
+            type: 'system', 
+            time: new Date().toISOString() 
+        }
+    );
 });
 
 server.listen(PORT, () => {
