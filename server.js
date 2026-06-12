@@ -22,16 +22,28 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Socket.io
-_socketio.on('connection', (socket) => {
-    console.log( `User connected >>> ${socket.id} at ${new Date().toLocaleString()}` );
-    socket.emit(
-        'message', 
-        { 
-            text: 'Welcome to the chat app!', 
-            type: 'system', 
-            time: new Date().toISOString() 
+_socketio.on('connection', socket => {
+    
+    socket.on('join', ({username, room}) => {
+        socket.username = username
+        socket.room = room;
+
+        socket.join(room);
+        socket.emit('message', `Welcome to ${room}, ${socket.username}!`);
+        socket.broadcast.emit('message', `${socket.username} has joined the chat`)
+    })
+    
+
+    socket.on('disconnect', () => {
+        if (socket.username) {
+            _socketio.emit('message', `${socket.username} has left the chat`);
         }
-    );
+    });
+
+    socket.on('chatMessage',(message)=>{
+        _socketio.emit('message', message)
+
+    })
 });
 
 server.listen(PORT, () => {
