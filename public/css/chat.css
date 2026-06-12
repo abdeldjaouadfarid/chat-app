@@ -1,0 +1,228 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+
+    background:
+        radial-gradient(circle at top left,#6d5dfc 0%,transparent 30%),
+        radial-gradient(circle at bottom right,#00d4ff 0%,transparent 30%),
+        linear-gradient(135deg,#0f172a,#1e293b);
+
+    color:#fff;
+}
+
+.container{
+    margin:30px auto;
+    max-width:1200px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.35);
+}
+
+#roomName{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:2rem;
+    font-weight:600;
+    color:#ffffff;
+}
+
+.chat-wrapper{
+    display:flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+#usersList{
+    width:260px;
+    height:600px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    overflow-y:auto;
+}
+
+#usersList h5{
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+#userListItems{
+    list-style:none;
+}
+
+#userListItems li{
+    padding:12px 15px;
+    margin-bottom:8px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.05);
+
+    transition:.3s;
+}
+
+#userListItems li:hover{
+    background:rgba(109,93,252,.35);
+    transform:translateX(5px);
+}
+
+#messages{
+    flex:1;
+    height:600px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    overflow-y:auto;
+}
+
+#messages h5{
+    margin-bottom:15px;
+}
+
+.message{
+    max-width:75%;
+
+    padding:14px 18px;
+    margin-bottom:15px;
+
+    background:rgba(255,255,255,.1);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(10px);
+}
+
+.username{
+    font-weight:600;
+    color:#8ab4ff;
+}
+
+.timestamp{
+    margin-left:10px;
+    font-size:.8rem;
+    opacity:.7;
+}
+
+.message-text{
+    margin-top:6px;
+    line-height:1.5;
+}
+
+#messageForm{
+    display:flex;
+    gap:10px;
+}
+
+#messageInput{
+    flex:1;
+
+    height:55px;
+
+    border:none;
+    border-radius:14px;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    padding:0 18px;
+}
+
+#messageInput::placeholder{
+    color:rgba(255,255,255,.6);
+}
+
+#messageInput:focus{
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px rgba(109,93,252,.35);
+}
+
+button{
+    width:60px;
+    height:55px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #6d5dfc,
+        #8b5cf6
+    );
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(109,93,252,.4);
+}
+
+button img{
+    width:22px;
+    filter:brightness(0) invert(1);
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.2);
+    border-radius:20px;
+}
+
+@media(max-width:900px){
+
+    .chat-wrapper{
+        flex-direction:column;
+    }
+
+    #usersList{
+        width:100%;
+        height:200px;
+    }
+
+    #messages{
+        height:500px;
+    }
+
+}

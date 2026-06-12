@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link href="./css/index.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="chat-welcome">
+
+        <h2 id="chat-username-title">
+            <i class="fas fa-comments"></i>
+            Live Chat
+        </h2>
+
+        <p class="text-muted">
+            Connect, chat, and meet people from around the world.
+        </p>
+
+    </div>
+
+    <form id="joinForm">
+
+        <!-- Username -->
+        <div class="form-group">
+
+            <label for="username">
+                <i class="fas fa-user"></i>
+                Username
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Enter your username"
+                required
+            >
+
+        </div>
+
+        <!-- Chat Room -->
+        <div class="form-group">
+
+            <label for="room">
+                <i class="fas fa-door-open"></i>
+                Chat Room
+            </label>
+
+            <select class="form-control" id="room" required>
+
+                <option value="">Select a Chat Room</option>
+
+                <option value="Friends Lounge">Friends Lounge</option>
+                <option value="Love Corner">Love Corner</option>
+                <option value="Fun Zone">Fun Zone</option>
+                <option value="Entertainment Hub">Entertainment Hub</option>
+                <option value="Creative Minds">Creative Minds</option>
+                <option value="Comedy Club">Comedy Club</option>
+                <option value="Ideas Café">Ideas Café</option>
+                <option value="Discussion Hub">Discussion Hub</option>
+                <option value="Think Tank">Think Tank</option>
+                <option value="Open Forum">Open Forum</option>
+
+            </select>
+
+        </div>
+
+        <!-- Join Button -->
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <i class="fas fa-right-to-bracket"></i>
+            Join Chat
+        </button>
+
+    </form>
+
+</div>
+
+<script src="./js/index.js"></script>
+
+</body>
+</html>
