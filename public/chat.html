@@ -1,21 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Chat Room</title>  
+    <title>Live Chat Room</title>
+
+    <!-- Google Font (preconnect makes the font download start earlier) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="./css/chat.css">
 </head>
 <body>
     <div class="container py-4">
 
-        <!-- Room Header -->
+        <!-- Back to the join page -->
+        <a href="index.html" id="leaveBtn" title="Leave the room">
+            <i class="fas fa-right-from-bracket"></i> Leave
+        </a>
+
+        <!-- Room Header (the room name is filled in by script.js) -->
         <div class="text-center mb-4">
-            <h1 id="roomName"><i class="fas fa-comments"></i> Ideas Café</h1>
-            <p class="text-muted">
+            <h1 id="roomName"><i class="fas fa-comments"></i> Live Chat</h1>
+            <p class="subtitle">
                 Connect, chat, and share ideas with people around the world.
             </p>
         </div>
@@ -23,19 +37,15 @@
         <!-- Chat Layout -->
         <div class="chat-wrapper">
 
-            <!-- Online Users -->
+            <!-- Online Users (filled by script.js with the real users from the server) -->
             <aside id="usersList">
                 <h5>
                     <i class="fas fa-users"></i>
                     Online Users
+                    <span id="userCount">0</span>
                 </h5>
 
-                <ul id="userListItems">
-                    <li>John</li>
-                    <li>Emma</li>
-                    <li>Michael</li>
-                    <li>Sarah</li>
-                </ul>
+                <ul id="userListItems"></ul>
             </aside>
 
             <!-- Messages Area -->
@@ -45,25 +55,28 @@
                     <i class="fas fa-comments"></i> Messages
                 </h5>
 
-                <div id="messageList"> <!------></div>
+                <div id="messageList" role="log"></div>
             </main>
 
         </div>
 
+        <!-- "Someone is typing..." line (filled by script.js) -->
+        <p id="typingIndicator" aria-live="polite"></p>
+
         <!-- Message Form -->
-        <form id="messageForm" class="d-flex mt-3">
+        <form id="messageForm">
 
             <input
                 type="text"
                 id="messageInput"
-                class="form-control mr-2"
                 placeholder="Type your message..."
                 autocomplete="off"
+                maxlength="500"
                 required
             >
 
-            <button type="submit" class="btn btn-primary">
-               <i class="fas fa-paper-plane"></i> 
+            <button type="submit" title="Send message">
+               <i class="fas fa-paper-plane"></i>
             </button>
 
         </form>
@@ -74,4 +87,3 @@
     <script src="./js/script.js"></script>
 </body>
 </html>
-

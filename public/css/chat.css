@@ -1,5 +1,11 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* Theme colors — change them here once and the whole page follows */
+:root{
+    --accent:#6d5dfc;
+    --accent-2:#8b5cf6;
+    --glass:rgba(255,255,255,.08);
+    --glass-border:rgba(255,255,255,.1);
+    --online:#4ade80;
+}
 
 *{
     margin:0;
@@ -12,7 +18,7 @@ body{
     font-family:'Poppins',sans-serif;
 
     background:
-        radial-gradient(circle at top left,#6d5dfc 0%,transparent 30%),
+        radial-gradient(circle at top left,var(--accent) 0%,transparent 30%),
         radial-gradient(circle at bottom right,#00d4ff 0%,transparent 30%),
         linear-gradient(135deg,#0f172a,#1e293b);
 
@@ -20,15 +26,17 @@ body{
 }
 
 .container{
+    position:relative;   /* anchor for the absolutely-positioned #leaveBtn */
+
     margin:30px auto;
     max-width:1200px;
 
-    background:rgba(255,255,255,.08);
+    background:var(--glass);
 
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
 
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid var(--glass-border);
 
     border-radius:24px;
 
@@ -38,19 +46,54 @@ body{
         0 20px 40px rgba(0,0,0,.35);
 }
 
+/* ---------- Header ---------- */
+
 #roomName{
     text-align:center;
-    margin-bottom:25px;
+    margin-bottom:8px;
     font-size:2rem;
     font-weight:600;
     color:#ffffff;
 }
 
+.subtitle{
+    opacity:.75;
+}
+
+#leaveBtn{
+    position:absolute;
+    top:28px;
+    right:25px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+    border:1px solid var(--glass-border);
+
+    background:var(--glass);
+
+    color:#fff;
+    font-size:.85rem;
+    text-decoration:none;
+
+    transition:background .3s;
+}
+
+#leaveBtn:hover{
+    background:rgba(239,68,68,.45);
+    color:#fff;
+    text-decoration:none;
+}
+
+/* ---------- Layout ---------- */
+
 .chat-wrapper{
     display:flex;
     gap:20px;
-    margin-bottom:20px;
+    margin-bottom:5px;
 }
+
+/* ---------- Online users sidebar ---------- */
 
 #usersList{
     width:260px;
@@ -65,11 +108,27 @@ body{
     padding:20px;
 
     overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(255,255,255,.25) transparent;
 }
 
 #usersList h5{
     margin-bottom:15px;
     font-weight:600;
+}
+
+#userCount{
+    display:inline-block;
+    min-width:28px;
+
+    margin-left:6px;
+    padding:2px 9px;
+
+    border-radius:999px;
+    background:rgba(109,93,252,.45);
+
+    font-size:.8rem;
+    text-align:center;
 }
 
 #userListItems{
@@ -84,13 +143,32 @@ body{
 
     background:rgba(255,255,255,.05);
 
-    transition:.3s;
+    transition:background .3s,transform .3s;
+}
+
+/* Green "online" dot in front of every name */
+#userListItems li::before{
+    content:'';
+    display:inline-block;
+    width:8px;
+    height:8px;
+    margin-right:10px;
+
+    border-radius:50%;
+    background:var(--online);
 }
 
 #userListItems li:hover{
     background:rgba(109,93,252,.35);
     transform:translateX(5px);
 }
+
+/* The current user's own entry in the list */
+#userListItems li.you{
+    background:rgba(109,93,252,.25);
+}
+
+/* ---------- Messages area ---------- */
 
 #messages{
     flex:1;
@@ -105,40 +183,107 @@ body{
     padding:20px;
 
     overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(255,255,255,.25) transparent;
 }
 
 #messages h5{
     margin-bottom:15px;
 }
 
+/* Friendly hint while the room has no messages yet */
+#messageList:empty::after{
+    content:'No messages yet — say hi! 👋';
+    display:block;
+    margin-top:40px;
+    text-align:center;
+    opacity:.5;
+}
+
+/* Message from someone else (default bubble, aligned left) */
 .message{
     max-width:75%;
+    width:fit-content;
 
-    padding:14px 18px;
-    margin-bottom:15px;
+    padding:12px 16px;
+    margin-bottom:14px;
 
     background:rgba(255,255,255,.1);
 
-    border-radius:18px;
+    border-radius:18px 18px 18px 4px;
 
     backdrop-filter:blur(10px);
+
+    overflow-wrap:anywhere;   /* long words / links wrap instead of overflowing */
+}
+
+/* The current user's own message: aligned right with the accent color */
+.message.own{
+    margin-left:auto;
+
+    background:linear-gradient(
+        135deg,
+        rgba(109,93,252,.6),
+        rgba(139,92,246,.45)
+    );
+
+    border-radius:18px 18px 4px 18px;
+}
+
+/* Server notice (welcome / joined / left): small centered pill */
+.message.system{
+    max-width:90%;
+    margin:0 auto 14px;
+
+    padding:6px 16px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:999px;
+
+    font-size:.85rem;
+    text-align:center;
+    opacity:.8;
+}
+
+.message-header{
+    margin-bottom:2px;
 }
 
 .username{
     font-weight:600;
+    font-size:.9rem;
     color:#8ab4ff;
+}
+
+.message.own .username{
+    color:#e4defc;
 }
 
 .timestamp{
     margin-left:10px;
-    font-size:.8rem;
+    font-size:.75rem;
+    font-weight:400;
     opacity:.7;
 }
 
 .message-text{
-    margin-top:6px;
     line-height:1.5;
 }
+
+/* ---------- Typing indicator ---------- */
+
+#typingIndicator{
+    min-height:1.4rem;   /* reserves the space so the layout never jumps */
+
+    margin:0 6px 8px;
+
+    font-size:.85rem;
+    font-style:italic;
+    opacity:.75;
+}
+
+/* ---------- Message form ---------- */
 
 #messageForm{
     display:flex;
@@ -153,7 +298,7 @@ body{
     border:none;
     border-radius:14px;
 
-    background:rgba(255,255,255,.08);
+    background:var(--glass);
 
     color:white;
 
@@ -171,7 +316,7 @@ body{
         0 0 0 3px rgba(109,93,252,.35);
 }
 
-button{
+#messageForm button{
     width:60px;
     height:55px;
 
@@ -180,26 +325,25 @@ button{
 
     background:linear-gradient(
         135deg,
-        #6d5dfc,
-        #8b5cf6
+        var(--accent),
+        var(--accent-2)
     );
+
+    color:#fff;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:transform .3s,box-shadow .3s;
 }
 
-button:hover{
+#messageForm button:hover{
     transform:translateY(-3px);
 
     box-shadow:
         0 10px 25px rgba(109,93,252,.4);
 }
 
-button img{
-    width:22px;
-    filter:brightness(0) invert(1);
-}
+/* ---------- Scrollbars (Chrome/Edge/Safari) ---------- */
 
 ::-webkit-scrollbar{
     width:8px;
@@ -209,6 +353,8 @@ button img{
     background:rgba(255,255,255,.2);
     border-radius:20px;
 }
+
+/* ---------- Small screens ---------- */
 
 @media(max-width:900px){
 
@@ -223,6 +369,12 @@ button img{
 
     #messages{
         height:500px;
+    }
+
+    #leaveBtn{
+        top:18px;
+        right:15px;
+        padding:6px 12px;
     }
 
 }

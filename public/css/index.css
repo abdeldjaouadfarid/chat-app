@@ -1,5 +1,10 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* Theme colors — change them here once and the whole page follows */
+:root{
+    --accent:#6d5dfc;
+    --accent-2:#8b5cf6;
+    --glass:rgba(255,255,255,.08);
+    --glass-border:rgba(255,255,255,.1);
+}
 
 *{
     margin:0;
@@ -13,15 +18,16 @@ body{
     justify-content:center;
     align-items:center;
 
+    padding:20px;   /* keeps the card off the edges on small screens */
+
     font-family:'Poppins', sans-serif;
 
     background:
-        radial-gradient(circle at top left,#6d5dfc 0%,transparent 35%),
+        radial-gradient(circle at top left,var(--accent) 0%,transparent 35%),
         radial-gradient(circle at bottom right,#00d4ff 0%,transparent 35%),
         linear-gradient(135deg,#0f172a,#1e293b);
 
     color:white;
-    overflow:hidden;
 }
 
 .container{
@@ -30,12 +36,12 @@ body{
 
     padding:40px;
 
-    background:rgba(255,255,255,0.08);
+    background:var(--glass);
 
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
 
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid var(--glass-border);
 
     border-radius:24px;
 
@@ -75,6 +81,10 @@ body{
     margin-bottom:18px;
 }
 
+label{
+    font-weight:500;
+}
+
 .form-control{
     height:52px;
 
@@ -86,7 +96,7 @@ body{
 
     padding:0 16px;
 
-    transition:.3s;
+    transition:background .3s,box-shadow .3s;
 }
 
 .form-control::placeholder{
@@ -95,7 +105,7 @@ body{
 
 .form-control:focus{
     background:rgba(255,255,255,.18);
-    
+    color:white;
 
     box-shadow:
         0 0 0 3px rgba(109,93,252,.35);
@@ -108,13 +118,20 @@ select.form-control{
     background:rgba(255,255,255,.12);
 }
 
+/* The dropdown list itself — without this, some browsers render
+   white text on a white background and the options are unreadable */
+select.form-control option{
+    background:#1e293b;
+    color:#fff;
+}
+
 #chat-username-title i{
-    color:#8b5cf6;
+    color:var(--accent-2);
     margin-right:10px;
 }
 
 label i{
-    color:#8b5cf6;
+    color:var(--accent-2);
     margin-right:8px;
 }
 
@@ -131,14 +148,14 @@ button i{
 
     background:linear-gradient(
         135deg,
-        #6d5dfc,
-        #8b5cf6
+        var(--accent),
+        var(--accent-2)
     );
 
     font-size:1rem;
     font-weight:600;
 
-    transition:.3s;
+    transition:transform .3s,box-shadow .3s;
 }
 
 .btn-primary:hover{
@@ -162,7 +179,6 @@ button i{
 @media(max-width:576px){
 
     .container{
-        margin:20px;
         padding:30px 25px;
     }
 
