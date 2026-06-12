@@ -144,9 +144,9 @@ function showMessage({ username, text, time }) {
     messageList.appendChild(wrapper);
 
     // Keep the newest message visible
-    if (messagesArea) {
-        messagesArea.scrollTop = messagesArea.scrollHeight;
-    }
+    
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+    
 }
 
 /**
